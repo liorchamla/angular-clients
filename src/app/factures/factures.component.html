@@ -1,0 +1,9 @@
+<div class="row" [@fadeInAnimation]=''>
+  <div class="col-md-6">
+    <app-factures-list></app-factures-list>
+    <a class="btn btn-primary" [routerLink]="['new']">Nouvelle facture</a>
+  </div>
+  <div class="col-md-6">
+    <router-outlet></router-outlet>
+  </div>
+</div>

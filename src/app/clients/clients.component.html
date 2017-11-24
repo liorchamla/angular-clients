@@ -1,0 +1,10 @@
+<div class="row" [@fadeInAnimation]=''>
+  <div class="col-md-6">
+    <h2>Les clients</h2>
+    <app-clients-list></app-clients-list>
+    <a class="btn btn-primary" [routerLink]="['new']">Ajouter un client</a>
+  </div>
+  <div class="col-md-6">
+    <router-outlet></router-outlet>
+  </div>
+</div>

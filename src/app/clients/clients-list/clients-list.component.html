@@ -1,0 +1,13 @@
+<p *ngIf="clients.length === 0">
+  Vous n'avez pas encore créé de clients ! Lancez-vous dans le commerce et ramenez nous des données !
+</p>
+<ul class="list-group">
+  <a
+    [routerLink]="[client.id]"
+    *ngFor="let client of clients"
+    class="list-group-item clearfix">
+      <img class="img-circle avatar pull-left" src="{{client.avatar}}">
+      {{client.prenom}} {{client.nom}} ({{client.ville}})
+      <span class="badge">{{client.notes.length}} notes</span>
+  </a>
+</ul>

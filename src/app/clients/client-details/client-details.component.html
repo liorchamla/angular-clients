@@ -1,0 +1,46 @@
+<h2>Détails de {{client.prenom}}</h2>
+<div class="row">
+  <div class="col-md-5">
+    <div class="thumbnail">
+      <img src="{{client.avatar}}" class="img-circle">
+      <div class="caption">
+        <h3>{{client.prenom}} {{client.nom}}</h3>
+        <p>Ville : <strong>{{client.ville}}</strong></p>
+        <p>
+          <a [routerLink]="['edit']" class="btn btn-primary" role="button">Editer</a>
+          <button class="btn btn-danger" role="button" (click)="onDelete()">Supprimer</button>
+        </p>
+        <hr>
+        <div *ngFor="let note of client.notes">
+          <span class="label label-sm label-primary">{{note.date | date: 'dd/MM/yyyy HH:mm'}}</span> {{note.contenu}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <table class="table table-hover table-striped">
+      <tr>
+        <th>Num.</th>
+        <th>Date</th>
+        <th>Statut</th>
+        <th>Montant</th>
+      </tr>
+      <tr *ngIf="!factures.length">
+        <td colspan="4">Aucune facture pour ce client</td>
+      </tr>
+      <tr *ngFor="let facture of factures">
+        <td><a [routerLink]="['/factures', facture.numero]">{{facture.numero}}</a></td>
+        <td>{{facture.date | date: 'dd/MM/yyyy'}}</td>
+        <td><span class="label {{facture.getStatusClassName()}}">{{facture.getStatusLabel()}}</span></td>
+        <td>{{facture.montant | currency: '€ '}}</td>
+      </tr>
+      <tr *ngIf="factures.length">
+        <td colspan="3" style="text-align: right">
+          <strong>Total :</strong>
+        </td>
+        <td><strong>{{getFacturesTotal() | currency : '€ '}}</strong></td>
+      </tr>
+    </table>
+    <a [routerLink]="['/factures','new', client.id]" class="pull-right btn btn-primary btn-sm">Créer une facture</a>
+  </div>
+</div>

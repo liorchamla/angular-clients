@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+      <h2 *ngIf="editing">Modification d'un client</h2>
+      <h2 *ngIf="!editing">Nouveau client</h2>
+      <div class="form-group">
+        <input type="text" class="form-control" formControlName="nom" id="nom" placeholder="Nom">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" formControlName="prenom" id="prenom" placeholder="Prénom">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" formControlName="ville" id="ville" placeholder="Ville">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" formControlName="avatar" #avatar id="avatar" placeholder="Avatar">
+      </div>
+      <div class="form-group">
+        <img [src]="avatar.value" alt="">
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-xs-12" formArrayName="notes">
+          <div class="form-group row" *ngFor="let noteCtrl of clientForm.get('notes').controls; let i = index" [formGroupName]="i">
+            <div class="col-xs-4">
+              <input type="text" placeholder="Date" class="form-control" readonly formControlName="date">
+            </div>
+            <div class="col-xs-6">
+              <input type="text" placeholder="Note" class="form-control" formControlName="contenu">
+            </div>
+            <div class="col-xs-2">
+              <button class="btn btn-danger" (click)="onDeleteNote(i)">X</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12"><button type="button" class="btn btn-success btn-sm" (click)="onAddNote()">Ajouter une note</button></div>
+      </div>
+      <hr>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" [disabled]="!clientForm.valid">Enregistrer</button>
+        <button type="button" class="btn btn-danger" (click)="onCancel()">Annuler</button>
+      </div>
+    </form>
+  </div>
+</div>

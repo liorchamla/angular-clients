@@ -1,0 +1,32 @@
+<h2 *ngIf="!editing">Nouvelle facture</h2>
+<h2 *ngIf="editing">Editer une facture</h2>
+
+<form [formGroup]="factureForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label>Client</label>
+    <select class="form-control" formControlName="client">
+      <option value="">-- Choisir un client --</option>
+      <option *ngFor="let client of clients" value="{{client.id}}">{{client.prenom}} {{client.nom}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Montant</label>
+    <input type="text" placeholder="Montant" class="form-control" formControlName="montant">
+  </div>
+  <div class="form-group">
+    <label>Date</label>
+    <input type="date" class="form-control" formControlName="date">
+  </div>
+  <div class="form-group">
+    <label>Status</label>
+    <select class="form-control" formControlName="statut">
+      <option value="envoyee">Envoyée</option>
+      <option value="retard">Retard</option>
+      <option value="reglee">Reglée</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary" type="submit">Enregistrer</button>
+    <button type="button" class="btn btn-danger">Annuler</button>
+  </div>
+</form>
